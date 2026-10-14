@@ -1,4 +1,4 @@
-const CACHE_NAME = "kanji-studio-v2";
+const CACHE_NAME = "kanji-studio-v3";
 const ASSETS = [
   "./",
   "index.html",
@@ -6,6 +6,7 @@ const ASSETS = [
   "css/style.css",
   "js/app.js",
   "js/stroke-renderer.js",
+  "js/quiz.js",
   "data/kanji_data.json",
   "data/lessons.json",
   "data/listening.json",

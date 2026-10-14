@@ -5,6 +5,7 @@ const CHUNK = 300;
 let activeFilter = "all";
 let searchTerm = "";
 let ALL_LESSONS = [];
+let ALL_VOCAB = [];
 let currentDetailOrigin = "kanji"; // "kanji" o "lessons", per sapere dove torna il bottone indietro
 
 const homeView = document.getElementById("homeView");
@@ -12,6 +13,9 @@ const detailView = document.getElementById("detailView");
 const lessonsListView = document.getElementById("lessonsListView");
 const lessonDetailView = document.getElementById("lessonDetailView");
 const listeningView = document.getElementById("listeningView");
+const exercisesSetupView = document.getElementById("exercisesSetupView");
+const exercisesQuizView = document.getElementById("exercisesQuizView");
+const exercisesResultView = document.getElementById("exercisesResultView");
 const backBtn = document.getElementById("backBtn");
 const homeTitle = document.getElementById("homeTitle");
 const kanjiGrid = document.getElementById("kanjiGrid");
@@ -21,7 +25,20 @@ const searchInput = document.getElementById("searchInput");
 const filterRow = document.getElementById("filterRow");
 const bottomNav = document.querySelector(".bottom-nav");
 
-const ALL_VIEWS = [homeView, detailView, lessonsListView, lessonDetailView, listeningView];
+const ALL_VIEWS = [
+  homeView, detailView, lessonsListView, lessonDetailView, listeningView,
+  exercisesSetupView, exercisesQuizView, exercisesResultView,
+];
+const TOP_LEVEL_VIEWS = [homeView, lessonsListView, listeningView, exercisesSetupView];
+
+// stato esercizi
+let quizMode = "kanji-meaning";
+let quizLevelFilter = "jlpt:5";
+let quizSession = []; // domande della sessione corrente
+let quizIndex = 0;
+let quizScore = 0;
+let quizWrongItems = [];
+let lastWrongSessionItems = []; // per il pulsante "rifai gli errori"
 
 init();
 
@@ -31,9 +48,15 @@ async function init() {
   wireSearch();
   wireStrokeControls();
   wireBottomNav();
+  wireExercises();
   backBtn.addEventListener("click", () => {
-    if (currentDetailOrigin === "lessons") showView(lessonsListView, "Lezioni");
-    else showHome();
+    if (!exercisesQuizView.classList.contains("hidden") || !exercisesResultView.classList.contains("hidden")) {
+      showView(exercisesSetupView, "Esercizi");
+    } else if (currentDetailOrigin === "lessons") {
+      showView(lessonsListView, "Lezioni");
+    } else {
+      showHome();
+    }
   });
 
   try {
@@ -55,7 +78,7 @@ function showView(view, title) {
   ALL_VIEWS.forEach((v) => v.classList.add("hidden"));
   view.classList.remove("hidden");
   homeTitle.textContent = title;
-  backBtn.classList.toggle("hidden", view === homeView || view === lessonsListView || view === listeningView);
+  backBtn.classList.toggle("hidden", TOP_LEVEL_VIEWS.includes(view));
   window.scrollTo(0, 0);
   if (view !== detailView) StrokeRenderer.stopPlaying();
 }
@@ -70,6 +93,10 @@ function wireBottomNav() {
     if (tab === "kanji") showHome();
     else if (tab === "lessons") showView(lessonsListView, "Lezioni");
     else if (tab === "listening") showView(listeningView, "Ascolto");
+    else if (tab === "exercises") {
+      updateQuizPoolInfo();
+      showView(exercisesSetupView, "Esercizi");
+    }
   });
 }
 
@@ -78,7 +105,9 @@ async function loadLessons() {
     const res = await fetch("data/lessons.json");
     const data = await res.json();
     ALL_LESSONS = data.lessons;
+    ALL_VOCAB = ALL_LESSONS.flatMap((l) => l.vocab);
     renderLessonsList();
+    updateQuizPoolInfo();
   } catch (e) {
     console.error(e);
   }
@@ -375,6 +404,133 @@ function wireStrokeControls() {
 function updateStrokeCount() {
   document.getElementById("strokeCount").textContent =
     `${StrokeRenderer.currentIndex()}/${StrokeRenderer.strokeCount()}`;
+}
+
+function wireExercises() {
+  document.getElementById("quizModeRow").addEventListener("click", (e) => {
+    const btn = e.target.closest(".chip");
+    if (!btn) return;
+    document.querySelectorAll("#quizModeRow .chip").forEach((c) => c.classList.remove("active"));
+    btn.classList.add("active");
+    quizMode = btn.dataset.mode;
+    document.getElementById("quizLevelSection").classList.toggle("hidden", quizMode === "vocab");
+    updateQuizPoolInfo();
+  });
+
+  document.getElementById("quizLevelRow").addEventListener("click", (e) => {
+    const btn = e.target.closest(".chip");
+    if (!btn) return;
+    document.querySelectorAll("#quizLevelRow .chip").forEach((c) => c.classList.remove("active"));
+    btn.classList.add("active");
+    quizLevelFilter = btn.dataset.filter;
+    updateQuizPoolInfo();
+  });
+
+  document.getElementById("startQuizBtn").addEventListener("click", () => {
+    const pool = getQuizPool();
+    quizSession = Quiz.generateSession(quizMode, pool, 10);
+    runQuizSession();
+  });
+
+  document.getElementById("redoWrongBtn").addEventListener("click", () => {
+    quizSession = Quiz.generateSession(quizMode, lastWrongSessionItems, lastWrongSessionItems.length);
+    runQuizSession();
+  });
+
+  document.getElementById("retrySameBtn").addEventListener("click", () => {
+    runQuizSession();
+  });
+
+  document.getElementById("backToSetupBtn").addEventListener("click", () => {
+    showView(exercisesSetupView, "Esercizi");
+  });
+}
+
+function getQuizPool() {
+  if (quizMode === "vocab") return ALL_VOCAB;
+  if (quizLevelFilter === "all") return ALL_KANJI;
+  const [type, valueStr] = quizLevelFilter.split(":");
+  const value = Number(valueStr);
+  return ALL_KANJI.filter((k) => (type === "jlpt" ? k.jlpt === value : k.grade === value));
+}
+
+function updateQuizPoolInfo() {
+  const info = document.getElementById("quizPoolInfo");
+  const startBtn = document.getElementById("startQuizBtn");
+  if (!info || !startBtn) return;
+  const pool = getQuizPool();
+  const unit = quizMode === "vocab" ? "parole" : "kanji";
+  info.textContent = `${pool.length} ${unit} disponibili in questo set`;
+  startBtn.disabled = pool.length < 4;
+}
+
+function runQuizSession() {
+  quizIndex = 0;
+  quizScore = 0;
+  quizWrongItems = [];
+  showView(exercisesQuizView, "Esercizi");
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion() {
+  const q = quizSession[quizIndex];
+  document.getElementById("quizProgress").textContent = `Domanda ${quizIndex + 1}/${quizSession.length} — punteggio: ${quizScore}`;
+  document.getElementById("quizPrompt").textContent = q.prompt;
+  document.getElementById("quizPromptSub").textContent = q.promptSub || "";
+
+  const optionsEl = document.getElementById("quizOptions");
+  optionsEl.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement("button");
+    btn.className = "quiz-option";
+    btn.textContent = opt;
+    btn.addEventListener("click", () => selectQuizAnswer(i));
+    optionsEl.appendChild(btn);
+  });
+}
+
+function selectQuizAnswer(choiceIndex) {
+  const q = quizSession[quizIndex];
+  const buttons = document.querySelectorAll("#quizOptions .quiz-option");
+  buttons.forEach((b) => (b.disabled = true));
+  buttons[q.correctIndex].classList.add("correct");
+
+  if (choiceIndex === q.correctIndex) {
+    quizScore += 1;
+  } else {
+    buttons[choiceIndex].classList.add("wrong");
+    quizWrongItems.push(q.item);
+  }
+
+  setTimeout(() => {
+    quizIndex += 1;
+    if (quizIndex < quizSession.length) {
+      renderQuizQuestion();
+    } else {
+      showQuizResults();
+    }
+  }, 900);
+}
+
+function showQuizResults() {
+  lastWrongSessionItems = quizWrongItems;
+  document.getElementById("resultScore").textContent = `${quizScore}/${quizSession.length}`;
+  const ratio = quizScore / quizSession.length;
+  let label = "Continua così!";
+  if (ratio === 1) label = "Perfetto! Tutte corrette.";
+  else if (ratio >= 0.8) label = "Ottimo lavoro!";
+  else if (ratio < 0.5) label = "Ripassa ancora un po'.";
+  document.getElementById("resultLabel").textContent = label;
+  showView(exercisesResultView, "Esercizi");
+
+  const wrongSection = document.getElementById("quizWrongSection");
+  const redoBtn = document.getElementById("redoWrongBtn");
+  if (lastWrongSessionItems.length > 0) {
+    wrongSection.classList.remove("hidden");
+    redoBtn.textContent = `Rifai gli errori (${lastWrongSessionItems.length})`;
+  } else {
+    wrongSection.classList.add("hidden");
+  }
 }
 
 function registerServiceWorker() {
