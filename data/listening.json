@@ -1,0 +1,30 @@
+{
+  "podcasts": [
+    {
+      "title": "Nihongo con Teppei (Beginners)",
+      "level": "N5",
+      "description": "Il podcast di ascolto per principianti piu' conosciuto: Teppei parla lentissimo, con frasi semplici ripetute. Episodi brevi (3-4 minuti), centinaia disponibili gratis.",
+      "url": "https://nihongoconteppei.com/category/podcast/"
+    },
+    {
+      "title": "NHK News Web Easy (やさしい日本語)",
+      "level": "N5-N4",
+      "description": "Notizie vere riscritte in giapponese semplificato dalla tv pubblica giapponese NHK, con furigana su ogni kanji e audio di ogni articolo. Ottimo per collegare lettura e ascolto.",
+      "url": "https://www3.nhk.or.jp/news/easy/"
+    },
+    {
+      "title": "Slow Japanese (Mochifika)",
+      "level": "N5-N3",
+      "description": "Podcast pensato apposta per chi impara: Akari parla lentamente e chiaramente su argomenti di vita quotidiana.",
+      "url": "https://mochifika.com"
+    }
+  ],
+  "video": [
+    {
+      "title": "NHK World-Japan (diretta TV gratuita)",
+      "level": "Tutti i livelli",
+      "description": "Canale internazionale ufficiale e gratuito della tv pubblica giapponese NHK, in diretta 24 ore su 24. Molti programmi hanno sottotitoli in inglese; non esistono invece servizi legali di tv/radio giapponesi locali con sottotitoli automatici in tempo reale.",
+      "url": "https://www3.nhk.or.jp/nhkworld/en/live/"
+    }
+  ]
+}

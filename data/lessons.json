@@ -1,0 +1,189 @@
+{
+  "lessons": [
+    {
+      "id": "saluti",
+      "title": "Saluti e autopresentazione",
+      "level": "N5",
+      "text_html": "はじめまして。わたしはマルコです。イタリア<ruby>人<rt>じん</rt></ruby>です。ローマに<ruby>住<rt>す</rt></ruby>んでいます。<ruby>学生<rt>がくせい</rt></ruby>です。<ruby>日本語<rt>にほんご</rt></ruby>を<ruby>勉強<rt>べんきょう</rt></ruby>しています。どうぞよろしく<ruby>お願<rt>ねが</rt></ruby>いします。",
+      "translation_it": "Piacere di conoscerti. Io sono Marco. Sono italiano. Vivo a Roma. Sono uno studente. Sto studiando giapponese. Piacere (trattami bene, per favore).",
+      "vocab": [
+        {"word": "はじめまして", "reading": "", "meaning_it": "piacere (alla prima volta che si incontra qualcuno)"},
+        {"word": "イタリア人", "reading": "イタリアじん", "meaning_it": "italiano/a (nazionalità)"},
+        {"word": "住んでいます", "reading": "すんでいます", "meaning_it": "vivo/abito (da 住む)"},
+        {"word": "学生", "reading": "がくせい", "meaning_it": "studente/studentessa"},
+        {"word": "日本語", "reading": "にほんご", "meaning_it": "lingua giapponese"},
+        {"word": "勉強します", "reading": "べんきょうします", "meaning_it": "studiare"},
+        {"word": "よろしくお願いします", "reading": "よろしくおねがいします", "meaning_it": "piacere di conoscerti / mi raccomando"}
+      ],
+      "grammar": [
+        {
+          "point": "〜は〜です (frase con il verbo essere)",
+          "explanation_it": "La particella は segna l'argomento della frase. La forma です corrisponde al verbo 'essere' in modo cortese.",
+          "example_jp": "わたしは学生です。",
+          "example_it": "Io sono uno studente."
+        },
+        {
+          "point": "Nazionalità: [Paese] + 人",
+          "explanation_it": "Per dire la propria nazionalità si aggiunge 人 (じん, 'persona') dopo il nome del paese.",
+          "example_jp": "イタリア人、日本人、フランス人",
+          "example_it": "italiano, giapponese, francese"
+        }
+      ]
+    },
+    {
+      "id": "famiglia",
+      "title": "La famiglia",
+      "level": "N5",
+      "text_html": "わたしの<ruby>家族<rt>かぞく</rt></ruby>は<ruby>四人<rt>よにん</rt></ruby>です。<ruby>父<rt>ちち</rt></ruby>と<ruby>母<rt>はは</rt></ruby>と<ruby>妹<rt>いもうと</rt></ruby>とわたしです。<ruby>父<rt>ちち</rt></ruby>は<ruby>会社員<rt>かいしゃいん</rt></ruby>です。<ruby>母<rt>はは</rt></ruby>は<ruby>先生<rt>せんせい</rt></ruby>です。<ruby>妹<rt>いもうと</rt></ruby>は<ruby>高校生<rt>こうこうせい</rt></ruby>です。<ruby>妹<rt>いもうと</rt></ruby>はとても<ruby>元気<rt>げんき</rt></ruby>です。わたしたちは<ruby>毎日<rt>まいにち</rt></ruby>いっしょに<ruby>晩<rt>ばん</rt></ruby>ご<ruby>飯<rt>はん</rt></ruby>を<ruby>食<rt>た</rt></ruby>べます。",
+      "translation_it": "La mia famiglia è di quattro persone: mio padre, mia madre, mia sorella minore e io. Mio padre è un impiegato. Mia madre è un'insegnante. Mia sorella minore è una studentessa di liceo. È molto energica. Ogni giorno ceniamo insieme.",
+      "vocab": [
+        {"word": "家族", "reading": "かぞく", "meaning_it": "famiglia"},
+        {"word": "父", "reading": "ちち", "meaning_it": "mio padre"},
+        {"word": "母", "reading": "はは", "meaning_it": "mia madre"},
+        {"word": "妹", "reading": "いもうと", "meaning_it": "sorella minore"},
+        {"word": "会社員", "reading": "かいしゃいん", "meaning_it": "impiegato/a d'azienda"},
+        {"word": "高校生", "reading": "こうこうせい", "meaning_it": "studente/essa di liceo"},
+        {"word": "元気", "reading": "げんき", "meaning_it": "energico, in salute"},
+        {"word": "毎日", "reading": "まいにち", "meaning_it": "ogni giorno"},
+        {"word": "晩ご飯", "reading": "ばんごはん", "meaning_it": "cena"}
+      ],
+      "grammar": [
+        {
+          "point": "と (congiunzione 'e' tra nomi)",
+          "explanation_it": "と collega due o più nomi in una lista completa, come 'e' in italiano.",
+          "example_jp": "父と母と妹",
+          "example_it": "papà, mamma e sorella minore"
+        },
+        {
+          "point": "Parole per la famiglia",
+          "explanation_it": "父/母/妹 si usano per parlare della PROPRIA famiglia. Per la famiglia di qualcun altro si usano le forme onorifiche お父さん/お母さん/妹さん.",
+          "example_jp": "わたしの母 / あなたのお母さん",
+          "example_it": "mia madre / sua madre (di un'altra persona)"
+        }
+      ]
+    },
+    {
+      "id": "numeri-ora",
+      "title": "I numeri e l'ora",
+      "level": "N5",
+      "text_html": "<ruby>今<rt>いま</rt></ruby>、<ruby>何時<rt>なんじ</rt></ruby>ですか。<ruby>今<rt>いま</rt></ruby>、<ruby>九時半<rt>くじはん</rt></ruby>です。わたしは<ruby>毎朝<rt>まいあさ</rt></ruby><ruby>七時<rt>しちじ</rt></ruby>に<ruby>起<rt>お</rt></ruby>きます。<ruby>八時<rt>はちじ</rt></ruby>に<ruby>家<rt>いえ</rt></ruby>を<ruby>出<rt>で</rt></ruby>ます。<ruby>九時<rt>くじ</rt></ruby>から<ruby>十二時<rt>じゅうにじ</rt></ruby>まで<ruby>日本語<rt>にほんご</rt></ruby>を<ruby>勉強<rt>べんきょう</rt></ruby>します。<ruby>十二時<rt>じゅうにじ</rt></ruby>に<ruby>昼<rt>ひる</rt></ruby>ご<ruby>飯<rt>はん</rt></ruby>を<ruby>食<rt>た</rt></ruby>べます。",
+      "translation_it": "Che ore sono ora? Ora sono le nove e mezza. Mi sveglio ogni mattina alle sette. Esco di casa alle otto. Dalle nove alle dodici studio giapponese. Alle dodici mangio il pranzo.",
+      "vocab": [
+        {"word": "何時", "reading": "なんじ", "meaning_it": "che ore / a che ora"},
+        {"word": "半", "reading": "はん", "meaning_it": "e mezza"},
+        {"word": "毎朝", "reading": "まいあさ", "meaning_it": "ogni mattina"},
+        {"word": "起きます", "reading": "おきます", "meaning_it": "svegliarsi, alzarsi"},
+        {"word": "家を出ます", "reading": "いえをでます", "meaning_it": "uscire di casa"},
+        {"word": "から〜まで", "reading": "", "meaning_it": "da... a... (tempo o luogo)"},
+        {"word": "昼ご飯", "reading": "ひるごはん", "meaning_it": "pranzo"}
+      ],
+      "grammar": [
+        {
+          "point": "Dire l'ora: 〜時(じ) / 〜時半(じはん)",
+          "explanation_it": "Per le ore si usa 時 dopo il numero; per 'e mezza' si aggiunge 半.",
+          "example_jp": "三時、三時半",
+          "example_it": "le tre, le tre e mezza"
+        },
+        {
+          "point": "から〜まで (da... a...)",
+          "explanation_it": "Indica l'inizio e la fine di un periodo di tempo (o di un percorso).",
+          "example_jp": "九時から十二時まで",
+          "example_it": "dalle nove alle dodici"
+        }
+      ]
+    },
+    {
+      "id": "shopping",
+      "title": "Lo shopping",
+      "level": "N5",
+      "text_html": "<ruby>今日<rt>きょう</rt></ruby>、デパートへ<ruby>行<rt>い</rt></ruby>きました。<ruby>新<rt>あたら</rt></ruby>しいかばんがほしかったです。<ruby>白<rt>しろ</rt></ruby>いかばんを<ruby>見<rt>み</rt></ruby>つけました。でも、ちょっと<ruby>高<rt>たか</rt></ruby>かったです。<ruby>店員<rt>てんいん</rt></ruby>さんに「すみません、これはいくらですか」と<ruby>聞<rt>き</rt></ruby>きました。「<ruby>五千円<rt>ごせんえん</rt></ruby>です」と<ruby>言<rt>い</rt></ruby>いました。わたしはそのかばんを<ruby>買<rt>か</rt></ruby>いました。",
+      "translation_it": "Oggi sono andato/a al grande magazzino. Volevo una borsa nuova. Ho trovato una borsa bianca. Però era un po' cara. Ho chiesto al commesso: \"Mi scusi, quanto costa questa?\". Ha risposto: \"Cinquemila yen\". Ho comprato quella borsa.",
+      "vocab": [
+        {"word": "デパート", "reading": "", "meaning_it": "grande magazzino"},
+        {"word": "かばん", "reading": "", "meaning_it": "borsa"},
+        {"word": "ほしい", "reading": "", "meaning_it": "volere (qualcosa), desiderare"},
+        {"word": "見つけます", "reading": "みつけます", "meaning_it": "trovare"},
+        {"word": "高い", "reading": "たかい", "meaning_it": "caro / alto"},
+        {"word": "店員", "reading": "てんいん", "meaning_it": "commesso/a"},
+        {"word": "いくらですか", "reading": "", "meaning_it": "quanto costa?"},
+        {"word": "買います", "reading": "かいます", "meaning_it": "comprare"}
+      ],
+      "grammar": [
+        {
+          "point": "Aggettivi in -i al passato: 〜かったです",
+          "explanation_it": "Gli aggettivi che finiscono in い diventano かったです al passato affermativo.",
+          "example_jp": "高い → 高かったです",
+          "example_it": "caro → era caro"
+        },
+        {
+          "point": "Discorso diretto con と言う / と聞く",
+          "explanation_it": "と dopo una frase tra virgolette introduce ciò che qualcuno ha detto o chiesto.",
+          "example_jp": "「いくらですか」と聞きました。",
+          "example_it": "Ho chiesto: \"quanto costa?\""
+        }
+      ]
+    },
+    {
+      "id": "stagioni",
+      "title": "Il tempo atmosferico e le stagioni",
+      "level": "N5",
+      "text_html": "<ruby>日本<rt>にほん</rt></ruby>には<ruby>四<rt>よっ</rt></ruby>つの<ruby>季節<rt>きせつ</rt></ruby>があります。<ruby>春<rt>はる</rt></ruby>、<ruby>夏<rt>なつ</rt></ruby>、<ruby>秋<rt>あき</rt></ruby>、<ruby>冬<rt>ふゆ</rt></ruby>です。<ruby>春<rt>はる</rt></ruby>は<ruby>暖<rt>あたた</rt></ruby>かいです。<ruby>夏<rt>なつ</rt></ruby>はとても<ruby>暑<rt>あつ</rt></ruby>いです。<ruby>秋<rt>あき</rt></ruby>は<ruby>涼<rt>すず</rt></ruby>しくて、<ruby>紅葉<rt>こうよう</rt></ruby>がきれいです。<ruby>冬<rt>ふゆ</rt></ruby>は<ruby>寒<rt>さむ</rt></ruby>いです。<ruby>北海道<rt>ほっかいどう</rt></ruby>では<ruby>雪<rt>ゆき</rt></ruby>がたくさん<ruby>降<rt>ふ</rt></ruby>ります。わたしは<ruby>秋<rt>あき</rt></ruby>がいちばん<ruby>好<rt>す</rt></ruby>きです。",
+      "translation_it": "In Giappone ci sono quattro stagioni: primavera, estate, autunno e inverno. La primavera è mite. L'estate è molto calda. L'autunno è fresco e il fogliame autunnale è bellissimo. L'inverno è freddo. A Hokkaido nevica molto. L'autunno è la mia stagione preferita.",
+      "vocab": [
+        {"word": "季節", "reading": "きせつ", "meaning_it": "stagione"},
+        {"word": "暖かい", "reading": "あたたかい", "meaning_it": "mite, piacevolmente caldo"},
+        {"word": "暑い", "reading": "あつい", "meaning_it": "caldo, afoso"},
+        {"word": "涼しい", "reading": "すずしい", "meaning_it": "fresco"},
+        {"word": "紅葉", "reading": "こうよう", "meaning_it": "foglie autunnali colorate"},
+        {"word": "寒い", "reading": "さむい", "meaning_it": "freddo"},
+        {"word": "雪が降ります", "reading": "ゆきがふります", "meaning_it": "nevica"},
+        {"word": "いちばん好き", "reading": "いちばんすき", "meaning_it": "il/la preferito/a"}
+      ],
+      "grammar": [
+        {
+          "point": "Unire due aggettivi in -i: 〜くて",
+          "explanation_it": "Per collegare due aggettivi in い nella stessa frase, il primo prende la forma くて.",
+          "example_jp": "涼しくて、きれいです。",
+          "example_it": "È fresco ed è bello."
+        },
+        {
+          "point": "いちばん + aggettivo (superlativo)",
+          "explanation_it": "いちばん davanti a un aggettivo o verbo indica 'il più' / 'la preferita'.",
+          "example_jp": "秋がいちばん好きです。",
+          "example_it": "L'autunno è la mia stagione preferita."
+        }
+      ]
+    },
+    {
+      "id": "routine",
+      "title": "La routine quotidiana",
+      "level": "N5",
+      "text_html": "わたしは<ruby>毎日<rt>まいにち</rt></ruby><ruby>六時半<rt>ろくじはん</rt></ruby>に<ruby>起<rt>お</rt></ruby>きます。シャワーを<ruby>浴<rt>あ</rt></ruby>びてから、<ruby>朝<rt>あさ</rt></ruby>ご<ruby>飯<rt>はん</rt></ruby>を<ruby>食<rt>た</rt></ruby>べます。<ruby>七時半<rt>しちじはん</rt></ruby>に<ruby>家<rt>いえ</rt></ruby>を<ruby>出<rt>で</rt></ruby>て、<ruby>電車<rt>でんしゃ</rt></ruby>で<ruby>会社<rt>かいしゃ</rt></ruby>へ<ruby>行<rt>い</rt></ruby>きます。<ruby>仕事<rt>しごと</rt></ruby>は<ruby>九時<rt>くじ</rt></ruby>に<ruby>始<rt>はじ</rt></ruby>まります。<ruby>六時<rt>ろくじ</rt></ruby>に<ruby>仕事<rt>しごと</rt></ruby>が<ruby>終<rt>お</rt></ruby>わります。<ruby>家<rt>いえ</rt></ruby>に<ruby>帰<rt>かえ</rt></ruby>って、<ruby>晩<rt>ばん</rt></ruby>ご<ruby>飯<rt>はん</rt></ruby>を<ruby>食<rt>た</rt></ruby>べます。それから、お<ruby>風呂<rt>ふろ</rt></ruby>に<ruby>入<rt>はい</rt></ruby>って、<ruby>十一時<rt>じゅういちじ</rt></ruby>に<ruby>寝<rt>ね</rt></ruby>ます。",
+      "translation_it": "Mi sveglio ogni giorno alle sei e mezza. Dopo essermi fatto/a la doccia, faccio colazione. Esco di casa alle sette e mezza e vado al lavoro in treno. Il lavoro inizia alle nove. Il lavoro finisce alle sei. Torno a casa e ceno. Poi faccio il bagno e vado a dormire alle undici.",
+      "vocab": [
+        {"word": "シャワーを浴びます", "reading": "シャワーをあびます", "meaning_it": "farsi la doccia"},
+        {"word": "電車", "reading": "でんしゃ", "meaning_it": "treno"},
+        {"word": "仕事", "reading": "しごと", "meaning_it": "lavoro"},
+        {"word": "始まります", "reading": "はじまります", "meaning_it": "iniziare (intransitivo)"},
+        {"word": "終わります", "reading": "おわります", "meaning_it": "finire (intransitivo)"},
+        {"word": "帰ります", "reading": "かえります", "meaning_it": "tornare (a casa)"},
+        {"word": "お風呂に入ります", "reading": "おふろにはいります", "meaning_it": "fare il bagno"},
+        {"word": "寝ます", "reading": "ねます", "meaning_it": "dormire, andare a letto"}
+      ],
+      "grammar": [
+        {
+          "point": "Forma て per collegare azioni in sequenza",
+          "explanation_it": "La forma て di un verbo collega più azioni che avvengono una dopo l'altra, come 'e poi' in italiano.",
+          "example_jp": "家を出て、会社へ行きます。",
+          "example_it": "Esco di casa e vado al lavoro."
+        },
+        {
+          "point": "Verbi intransitivi 始まります / 終わります",
+          "explanation_it": "Questi verbi descrivono qualcosa che inizia o finisce 'da sé', senza indicare chi lo fa iniziare o finire.",
+          "example_jp": "仕事が九時に始まります。",
+          "example_it": "Il lavoro inizia alle nove."
+        }
+      ]
+    }
+  ]
+}

@@ -4,9 +4,14 @@ let RENDER_COUNT = 0;
 const CHUNK = 300;
 let activeFilter = "all";
 let searchTerm = "";
+let ALL_LESSONS = [];
+let currentDetailOrigin = "kanji"; // "kanji" o "lessons", per sapere dove torna il bottone indietro
 
 const homeView = document.getElementById("homeView");
 const detailView = document.getElementById("detailView");
+const lessonsListView = document.getElementById("lessonsListView");
+const lessonDetailView = document.getElementById("lessonDetailView");
+const listeningView = document.getElementById("listeningView");
 const backBtn = document.getElementById("backBtn");
 const homeTitle = document.getElementById("homeTitle");
 const kanjiGrid = document.getElementById("kanjiGrid");
@@ -14,6 +19,9 @@ const loadingMsg = document.getElementById("loadingMsg");
 const countInfo = document.getElementById("countInfo");
 const searchInput = document.getElementById("searchInput");
 const filterRow = document.getElementById("filterRow");
+const bottomNav = document.querySelector(".bottom-nav");
+
+const ALL_VIEWS = [homeView, detailView, lessonsListView, lessonDetailView, listeningView];
 
 init();
 
@@ -22,7 +30,11 @@ async function init() {
   wireFilters();
   wireSearch();
   wireStrokeControls();
-  backBtn.addEventListener("click", showHome);
+  wireBottomNav();
+  backBtn.addEventListener("click", () => {
+    if (currentDetailOrigin === "lessons") showView(lessonsListView, "Lezioni");
+    else showHome();
+  });
 
   try {
     const res = await fetch("data/kanji_data.json");
@@ -35,6 +47,156 @@ async function init() {
   }
 
   setupInfiniteScroll();
+  loadLessons();
+  loadListening();
+}
+
+function showView(view, title) {
+  ALL_VIEWS.forEach((v) => v.classList.add("hidden"));
+  view.classList.remove("hidden");
+  homeTitle.textContent = title;
+  backBtn.classList.toggle("hidden", view === homeView || view === lessonsListView || view === listeningView);
+  window.scrollTo(0, 0);
+  if (view !== detailView) StrokeRenderer.stopPlaying();
+}
+
+function wireBottomNav() {
+  bottomNav.addEventListener("click", (e) => {
+    const btn = e.target.closest(".nav-btn");
+    if (!btn) return;
+    bottomNav.querySelectorAll(".nav-btn").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    const tab = btn.dataset.tab;
+    if (tab === "kanji") showHome();
+    else if (tab === "lessons") showView(lessonsListView, "Lezioni");
+    else if (tab === "listening") showView(listeningView, "Ascolto");
+  });
+}
+
+async function loadLessons() {
+  try {
+    const res = await fetch("data/lessons.json");
+    const data = await res.json();
+    ALL_LESSONS = data.lessons;
+    renderLessonsList();
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+function renderLessonsList() {
+  const list = document.getElementById("lessonsList");
+  list.innerHTML = "";
+  ALL_LESSONS.forEach((lesson) => {
+    const card = document.createElement("div");
+    card.className = "lesson-card";
+    const title = document.createElement("div");
+    title.className = "lesson-card-title";
+    title.textContent = lesson.title;
+    const level = document.createElement("span");
+    level.className = "lesson-card-level";
+    level.textContent = lesson.level;
+    card.appendChild(title);
+    card.appendChild(level);
+    card.addEventListener("click", () => openLessonDetail(lesson));
+    list.appendChild(card);
+  });
+}
+
+function openLessonDetail(lesson) {
+  currentDetailOrigin = "lessons";
+  document.getElementById("lessonLevel").innerHTML = "";
+  document.getElementById("lessonLevel").appendChild(tagEl(lesson.level));
+  document.getElementById("lessonText").innerHTML = lesson.text_html;
+  document.getElementById("lessonTranslation").textContent = lesson.translation_it;
+
+  const vocabList = document.getElementById("lessonVocab");
+  vocabList.innerHTML = "";
+  lesson.vocab.forEach((v) => {
+    const item = document.createElement("div");
+    item.className = "vocab-item";
+    const top = document.createElement("div");
+    const word = document.createElement("span");
+    word.className = "vocab-word";
+    word.textContent = v.word;
+    const reading = document.createElement("span");
+    reading.className = "vocab-reading";
+    reading.textContent = v.reading;
+    top.appendChild(word);
+    top.appendChild(reading);
+    const meaning = document.createElement("div");
+    meaning.className = "vocab-meaning";
+    meaning.textContent = v.meaning_it;
+    item.appendChild(top);
+    item.appendChild(meaning);
+    vocabList.appendChild(item);
+  });
+
+  const grammarList = document.getElementById("lessonGrammar");
+  grammarList.innerHTML = "";
+  lesson.grammar.forEach((g) => {
+    const item = document.createElement("div");
+    item.className = "grammar-item";
+    const point = document.createElement("div");
+    point.className = "grammar-point";
+    point.textContent = g.point;
+    const expl = document.createElement("div");
+    expl.className = "grammar-explanation";
+    expl.textContent = g.explanation_it;
+    const example = document.createElement("div");
+    example.className = "grammar-example";
+    example.textContent = g.example_jp;
+    const exampleIt = document.createElement("div");
+    exampleIt.className = "grammar-example-it";
+    exampleIt.textContent = g.example_it;
+    item.appendChild(point);
+    item.appendChild(expl);
+    item.appendChild(example);
+    item.appendChild(exampleIt);
+    grammarList.appendChild(item);
+  });
+
+  showView(lessonDetailView, lesson.title);
+}
+
+async function loadListening() {
+  try {
+    const res = await fetch("data/listening.json");
+    const data = await res.json();
+    renderResourceList("podcastList", data.podcasts);
+    renderResourceList("videoList", data.video);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+function renderResourceList(containerId, items) {
+  const list = document.getElementById(containerId);
+  list.innerHTML = "";
+  (items || []).forEach((r) => {
+    const card = document.createElement("div");
+    card.className = "resource-card";
+    const title = document.createElement("div");
+    title.className = "resource-card-title";
+    title.textContent = r.title;
+    const level = document.createElement("span");
+    level.className = "resource-card-level";
+    level.textContent = r.level;
+    const desc = document.createElement("div");
+    desc.className = "resource-card-desc";
+    desc.textContent = r.description;
+    const link = document.createElement("a");
+    link.className = "resource-card-link";
+    link.href = r.url;
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = "Apri →";
+    card.appendChild(title);
+    card.appendChild(level);
+    card.appendChild(desc);
+    card.appendChild(link);
+    list.appendChild(card);
+  });
 }
 
 function wireFilters() {
@@ -110,7 +272,7 @@ function buildCard(k) {
 
 function setupInfiniteScroll() {
   window.addEventListener("scroll", () => {
-    if (detailView.classList.contains("hidden")) {
+    if (!homeView.classList.contains("hidden")) {
       const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 400;
       if (nearBottom && RENDER_COUNT < FILTERED.length) {
         renderNextChunk();
@@ -120,22 +282,15 @@ function setupInfiniteScroll() {
 }
 
 function showHome() {
-  detailView.classList.add("hidden");
-  homeView.classList.remove("hidden");
-  backBtn.classList.add("hidden");
-  homeTitle.textContent = "Kanji Studio";
-  StrokeRenderer.stopPlaying();
+  showView(homeView, "Kanji Studio");
 }
 
 function showDetail() {
-  homeView.classList.add("hidden");
-  detailView.classList.remove("hidden");
-  backBtn.classList.remove("hidden");
-  window.scrollTo(0, 0);
+  currentDetailOrigin = "kanji";
+  showView(detailView, document.getElementById("detailChar").textContent);
 }
 
 function openDetail(k) {
-  homeTitle.textContent = k.kanji;
   document.getElementById("detailChar").textContent = k.kanji;
   document.getElementById("detailMeaningIt").textContent = k.meanings_it.slice(0, 3).join(", ") || "—";
   document.getElementById("detailMeaningEn").textContent = k.meanings_en.join(", ");

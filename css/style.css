@@ -22,7 +22,7 @@ html, body {
 }
 
 body {
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: calc(60px + env(safe-area-inset-bottom));
 }
 
 .topbar {
@@ -302,4 +302,142 @@ body {
   color: var(--text-dim);
   font-size: 14px;
   padding: 8px 2px;
+}
+
+/* Bottom nav */
+
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.nav-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 13px;
+  padding: 12px 0 10px;
+  cursor: pointer;
+}
+
+.nav-btn.active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Lezioni */
+
+.section-title {
+  font-size: 15px;
+  color: var(--accent-2);
+  margin: 18px 2px 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.lessons-list, .resource-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lesson-card, .resource-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  cursor: pointer;
+}
+
+.resource-card {
+  cursor: default;
+}
+
+.lesson-card-title, .resource-card-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.lesson-card-level, .resource-card-level {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--accent-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 9px;
+}
+
+.resource-card-desc {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+.resource-card-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.lesson-text {
+  font-size: 22px;
+  line-height: 2.1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 10px;
+}
+
+.lesson-text ruby rt {
+  font-size: 11px;
+  color: var(--accent-2);
+}
+
+.grammar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.grammar-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.grammar-point {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.grammar-explanation {
+  font-size: 13px;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.grammar-example {
+  margin-top: 8px;
+  font-size: 15px;
+}
+
+.grammar-example-it {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 2px;
 }

@@ -87,6 +87,47 @@
   </section>
 </main>
 
+<main id="lessonsListView" class="view hidden">
+  <p class="count-info">Letture guidate di livello N5, con furigana, vocabolario e grammatica spiegata in italiano.</p>
+  <div id="lessonsList" class="lessons-list"></div>
+</main>
+
+<main id="lessonDetailView" class="view hidden">
+  <section class="detail-section">
+    <div id="lessonLevel" class="detail-tags"></div>
+    <div id="lessonText" class="lesson-text"></div>
+  </section>
+
+  <section class="detail-section">
+    <h2>Traduzione</h2>
+    <p id="lessonTranslation" class="meaning-full"></p>
+  </section>
+
+  <section class="detail-section">
+    <h2>Vocabolario</h2>
+    <div id="lessonVocab" class="vocab-list"></div>
+  </section>
+
+  <section class="detail-section">
+    <h2>Grammatica</h2>
+    <div id="lessonGrammar" class="grammar-list"></div>
+  </section>
+</main>
+
+<main id="listeningView" class="view hidden">
+  <p class="count-info">Risorse vere e verificate per allenare l'ascolto, dal livello principiante in su.</p>
+  <h2 class="section-title">Podcast</h2>
+  <div id="podcastList" class="resource-list"></div>
+  <h2 class="section-title">Video e diretta TV</h2>
+  <div id="videoList" class="resource-list"></div>
+</main>
+
+<nav class="bottom-nav">
+  <button class="nav-btn active" data-tab="kanji">Kanji</button>
+  <button class="nav-btn" data-tab="lessons">Lezioni</button>
+  <button class="nav-btn" data-tab="listening">Ascolto</button>
+</nav>
+
 <script src="js/stroke-renderer.js"></script>
 <script src="js/app.js"></script>
 </body>
