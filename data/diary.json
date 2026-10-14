@@ -1,0 +1,54 @@
+{
+  "intro": "Il diario (日記, にっき) è uno dei modi migliori per fissare quello che studi: usi le parole che conosci per parlare di cose vere. Qui sotto trovi dei 'pezzi' di frase pronti: scegline alcuni e l'app ti mostra come si uniscono in un diario vero. Comincia dal Livello 1 e sali man mano.",
+  "note": "Nota culturale: nel diario privato i giapponesi spesso usano la forma semplice (senza です/ます). Qui invece usiamo la forma in です/ます perché è quella che hai già imparato nelle Lezioni — è corretta e naturale anche così.",
+  "levels": [
+    {
+      "id": 1,
+      "title": "Livello 1 — Una frase sola",
+      "guidance_it": "Il diario più semplice possibile: una sola frase su cosa hai fatto oggi. Struttura: 今日は (oggi) + [attività] + 。",
+      "fields": ["attivita"]
+    },
+    {
+      "id": 2,
+      "title": "Livello 2 — Aggiungi meteo e sentimento",
+      "guidance_it": "Ora il diario ha tre frasi: che tempo faceva, cosa hai fatto, come ti sei sentito. そして collega l'ultima frase, e significa 'e poi, inoltre'.",
+      "fields": ["meteo", "attivita", "sentimento"]
+    },
+    {
+      "id": 3,
+      "title": "Livello 3 — Due azioni collegate",
+      "guidance_it": "Impari それから ('dopo, in seguito'), per raccontare due cose fatte in ordine, più come ti sei sentito alla fine.",
+      "fields": ["attivita1", "attivita2", "sentimento"]
+    }
+  ],
+  "phrases": {
+    "meteo": [
+      {"jp": "<ruby>晴<rt>は</rt></ruby>れでした", "it": "era sereno"},
+      {"jp": "<ruby>曇<rt>くも</rt></ruby>りでした", "it": "era nuvoloso"},
+      {"jp": "<ruby>雨<rt>あめ</rt></ruby>でした", "it": "pioveva"},
+      {"jp": "<ruby>暑<rt>あつ</rt></ruby>かったです", "it": "faceva caldo"},
+      {"jp": "<ruby>寒<rt>さむ</rt></ruby>かったです", "it": "faceva freddo"},
+      {"jp": "<ruby>涼<rt>すず</rt></ruby>しかったです", "it": "era fresco"}
+    ],
+    "attivita": [
+      {"jp": "<ruby>友達<rt>ともだち</rt></ruby>と<ruby>映画<rt>えいが</rt></ruby>を<ruby>見<rt>み</rt></ruby>ました", "it": "ho visto un film con un amico/a"},
+      {"jp": "<ruby>日本語<rt>にほんご</rt></ruby>を<ruby>勉強<rt>べんきょう</rt></ruby>しました", "it": "ho studiato giapponese"},
+      {"jp": "<ruby>公園<rt>こうえん</rt></ruby>を<ruby>散歩<rt>さんぽ</rt></ruby>しました", "it": "ho fatto una passeggiata al parco"},
+      {"jp": "おいしいラーメンを<ruby>食<rt>た</rt></ruby>べました", "it": "ho mangiato un ottimo ramen"},
+      {"jp": "<ruby>仕事<rt>しごと</rt></ruby>がとても<ruby>忙<rt>いそが</rt></ruby>しかったです", "it": "il lavoro è stato molto impegnativo"},
+      {"jp": "<ruby>本<rt>ほん</rt></ruby>を<ruby>読<rt>よ</rt></ruby>みました", "it": "ho letto un libro"},
+      {"jp": "<ruby>友達<rt>ともだち</rt></ruby>に<ruby>会<rt>あ</rt></ruby>いました", "it": "ho incontrato un amico/a"},
+      {"jp": "<ruby>買<rt>か</rt></ruby>い<ruby>物<rt>もの</rt></ruby>に<ruby>行<rt>い</rt></ruby>きました", "it": "sono andato/a a fare shopping"},
+      {"jp": "うちでゆっくり<ruby>休<rt>やす</rt></ruby>みました", "it": "mi sono riposato/a con calma a casa"},
+      {"jp": "<ruby>早<rt>はや</rt></ruby>く<ruby>寝<rt>ね</rt></ruby>ました", "it": "sono andato/a a letto presto"}
+    ],
+    "sentimento": [
+      {"jp": "とても<ruby>楽<rt>たの</rt></ruby>しかったです", "it": "è stato molto divertente"},
+      {"jp": "<ruby>疲<rt>つか</rt></ruby>れました", "it": "sono stanco/a"},
+      {"jp": "うれしかったです", "it": "ero felice"},
+      {"jp": "ちょっと<ruby>大変<rt>たいへん</rt></ruby>でした", "it": "è stato un po' difficile"},
+      {"jp": "<ruby>気持<rt>きも</rt></ruby>ちがよかったです", "it": "mi sono sentito/a bene"},
+      {"jp": "<ruby>満足<rt>まんぞく</rt></ruby>しています", "it": "sono soddisfatto/a"}
+    ]
+  }
+}

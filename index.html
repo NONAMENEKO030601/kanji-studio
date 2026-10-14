@@ -171,10 +171,31 @@
   <button id="backToSetupBtn" class="secondary-btn">Scegli un altro esercizio</button>
 </main>
 
+<main id="diaryView" class="view hidden">
+  <p id="diaryIntro" class="count-info"></p>
+  <p id="diaryNote" class="diary-note"></p>
+
+  <div class="filter-row" id="diaryLevelRow">
+    <button class="chip active" data-level="1">Livello 1</button>
+    <button class="chip" data-level="2">Livello 2</button>
+    <button class="chip" data-level="3">Livello 3</button>
+  </div>
+  <p id="diaryGuidance" class="diary-guidance"></p>
+
+  <div id="diaryFields"></div>
+
+  <h2 class="section-title">Il tuo diario di oggi</h2>
+  <div class="quiz-card diary-preview">
+    <div id="diaryPreviewJp" class="lesson-text diary-preview-jp"></div>
+    <p id="diaryPreviewIt" class="meaning-full diary-preview-it"></p>
+  </div>
+</main>
+
 <nav class="bottom-nav">
   <button class="nav-btn active" data-tab="kanji">Kanji</button>
   <button class="nav-btn" data-tab="lessons">Lezioni</button>
   <button class="nav-btn" data-tab="exercises">Esercizi</button>
+  <button class="nav-btn" data-tab="diary">Diario</button>
   <button class="nav-btn" data-tab="listening">Ascolto</button>
 </nav>
 

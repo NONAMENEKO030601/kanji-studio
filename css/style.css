@@ -323,8 +323,8 @@ body {
   background: none;
   border: none;
   color: var(--text-dim);
-  font-size: 13px;
-  padding: 12px 0 10px;
+  font-size: 11.5px;
+  padding: 12px 2px 10px;
   cursor: pointer;
 }
 
@@ -542,4 +542,79 @@ body {
   margin-top: 8px;
   color: var(--text-dim);
   font-size: 15px;
+}
+
+/* Diario */
+
+.diary-note {
+  font-size: 12px;
+  color: var(--text-dim);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin: 10px 0;
+  line-height: 1.5;
+}
+
+.diary-guidance {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin: 0 2px 14px;
+  line-height: 1.5;
+}
+
+.diary-field-group {
+  margin-bottom: 16px;
+}
+
+.diary-field-label {
+  font-size: 13px;
+  color: var(--accent-2);
+  margin: 0 2px 8px;
+  font-weight: 600;
+}
+
+.diary-field-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.diary-option {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 15px;
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.diary-option .diary-option-it {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+.diary-option.active {
+  border-color: var(--accent);
+  background: rgba(224, 122, 63, 0.15);
+}
+
+.diary-preview {
+  margin-top: 10px;
+  text-align: left;
+  padding: 18px;
+}
+
+.diary-preview-jp {
+  margin-top: 0;
+  font-size: 19px;
+}
+
+.diary-preview-it {
+  margin-top: 12px;
 }

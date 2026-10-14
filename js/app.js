@@ -16,6 +16,7 @@ const listeningView = document.getElementById("listeningView");
 const exercisesSetupView = document.getElementById("exercisesSetupView");
 const exercisesQuizView = document.getElementById("exercisesQuizView");
 const exercisesResultView = document.getElementById("exercisesResultView");
+const diaryView = document.getElementById("diaryView");
 const backBtn = document.getElementById("backBtn");
 const homeTitle = document.getElementById("homeTitle");
 const kanjiGrid = document.getElementById("kanjiGrid");
@@ -27,9 +28,14 @@ const bottomNav = document.querySelector(".bottom-nav");
 
 const ALL_VIEWS = [
   homeView, detailView, lessonsListView, lessonDetailView, listeningView,
-  exercisesSetupView, exercisesQuizView, exercisesResultView,
+  exercisesSetupView, exercisesQuizView, exercisesResultView, diaryView,
 ];
-const TOP_LEVEL_VIEWS = [homeView, lessonsListView, listeningView, exercisesSetupView];
+const TOP_LEVEL_VIEWS = [homeView, lessonsListView, listeningView, exercisesSetupView, diaryView];
+
+// stato diario
+let DIARY_DATA = null;
+let diaryLevelId = 1;
+let diarySelections = {};
 
 // stato esercizi
 let quizMode = "kanji-meaning";
@@ -72,6 +78,7 @@ async function init() {
   setupInfiniteScroll();
   loadLessons();
   loadListening();
+  loadDiary();
 }
 
 function showView(view, title) {
@@ -96,6 +103,8 @@ function wireBottomNav() {
     else if (tab === "exercises") {
       updateQuizPoolInfo();
       showView(exercisesSetupView, "Esercizi");
+    } else if (tab === "diary") {
+      showView(diaryView, "Diario");
     }
   });
 }
@@ -531,6 +540,117 @@ function showQuizResults() {
   } else {
     wrongSection.classList.add("hidden");
   }
+}
+
+const DIARY_FIELD_LABELS = {
+  meteo: "Che tempo faceva",
+  attivita: "Cosa hai fatto",
+  attivita1: "Prima cosa che hai fatto",
+  attivita2: "Dopo, cosa hai fatto",
+  sentimento: "Come ti sei sentito/a",
+};
+const DIARY_FIELD_CATEGORY = {
+  meteo: "meteo",
+  attivita: "attivita",
+  attivita1: "attivita",
+  attivita2: "attivita",
+  sentimento: "sentimento",
+};
+
+async function loadDiary() {
+  try {
+    const res = await fetch("data/diary.json");
+    DIARY_DATA = await res.json();
+    document.getElementById("diaryIntro").textContent = DIARY_DATA.intro;
+    document.getElementById("diaryNote").textContent = DIARY_DATA.note;
+    wireDiaryLevels();
+    renderDiaryLevel(1);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+function wireDiaryLevels() {
+  document.getElementById("diaryLevelRow").addEventListener("click", (e) => {
+    const btn = e.target.closest(".chip");
+    if (!btn) return;
+    document.querySelectorAll("#diaryLevelRow .chip").forEach((c) => c.classList.remove("active"));
+    btn.classList.add("active");
+    renderDiaryLevel(Number(btn.dataset.level));
+  });
+}
+
+function capitalize(s) {
+  return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+}
+
+function renderDiaryLevel(levelId) {
+  diaryLevelId = levelId;
+  const level = DIARY_DATA.levels.find((l) => l.id === levelId);
+  document.getElementById("diaryGuidance").textContent = level.guidance_it;
+
+  diarySelections = {};
+  level.fields.forEach((field, i) => {
+    const category = DIARY_FIELD_CATEGORY[field];
+    const options = DIARY_DATA.phrases[category];
+    // per i due campi "attivita" di livello 3 parti da frasi diverse di default
+    const defaultIndex = field === "attivita2" ? 1 : 0;
+    diarySelections[field] = options[defaultIndex];
+  });
+
+  const container = document.getElementById("diaryFields");
+  container.innerHTML = "";
+  level.fields.forEach((field) => {
+    const category = DIARY_FIELD_CATEGORY[field];
+    const options = DIARY_DATA.phrases[category];
+
+    const group = document.createElement("div");
+    group.className = "diary-field-group";
+    const label = document.createElement("div");
+    label.className = "diary-field-label";
+    label.textContent = DIARY_FIELD_LABELS[field];
+    group.appendChild(label);
+
+    const optionsEl = document.createElement("div");
+    optionsEl.className = "diary-field-options";
+    options.forEach((opt) => {
+      const btn = document.createElement("button");
+      btn.className = "diary-option";
+      if (opt === diarySelections[field]) btn.classList.add("active");
+      btn.textContent = capitalize(opt.it);
+      btn.addEventListener("click", () => {
+        diarySelections[field] = opt;
+        optionsEl.querySelectorAll(".diary-option").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderDiaryPreview();
+      });
+      optionsEl.appendChild(btn);
+    });
+    group.appendChild(optionsEl);
+    container.appendChild(group);
+  });
+
+  renderDiaryPreview();
+}
+
+function renderDiaryPreview() {
+  const s = diarySelections;
+  let jp = "";
+  let it = "";
+
+  if (diaryLevelId === 1) {
+    jp = `今日は${s.attivita.jp}。`;
+    it = `Oggi, ${s.attivita.it}.`;
+  } else if (diaryLevelId === 2) {
+    jp = `今日の天気は${s.meteo.jp}。今日は${s.attivita.jp}。そして、${s.sentimento.jp}。`;
+    it = `Il tempo oggi: ${s.meteo.it}. Oggi, ${s.attivita.it}. ${capitalize(s.sentimento.it)}.`;
+  } else {
+    jp = `今日は${s.attivita1.jp}。それから、${s.attivita2.jp}。${s.sentimento.jp}。`;
+    it = `Oggi, ${s.attivita1.it}. Poi, ${s.attivita2.it}. ${capitalize(s.sentimento.it)}.`;
+  }
+
+  document.getElementById("diaryPreviewJp").innerHTML = jp;
+  document.getElementById("diaryPreviewIt").textContent = it;
 }
 
 function registerServiceWorker() {
